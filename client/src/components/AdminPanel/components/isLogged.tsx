@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks/hooks"
 import { RootState } from "../../../redux/store/store";
-import { ValidateToken } from "../../../redux/actions/Users";
-import { useEffect } from "react";
+import { ValidateToken } from "../../../redux/actions/users";
 
 export default function IsLogged() {
     const validateLog = useAppSelector((state: RootState) => state.isLogged.status);
