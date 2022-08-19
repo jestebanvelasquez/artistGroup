@@ -77,7 +77,7 @@ const showNav = (flag) => {
                 <p className="text-base text-black leading-4 ">Admins</p>                    
         </button>
     </div>
-    {/* <div className="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
+    <div className="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
         <button onclick={() => showMenu1(true)}  className="focus:outline-none focus:text-indigo-400 text-left  text-white flex justify-between items-center w-full py-5 space-x-14  ">
             <p className="text-sm leading-5  uppercase">Profile Overview</p>
             <img className="transform" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/sidebar2-svg6.svg" alt="profile overview" />                  
@@ -137,7 +137,7 @@ const showNav = (flag) => {
             </button>
         </div>
     </div>
-    <div className="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
+    {/* <div className="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
         <button onclick="showMenu2(true)" className="focus:outline-none focus:text-indigo-400  text-white flex justify-between items-center w-full py-5 space-x-14  ">
             <p className="text-sm leading-5 uppercase">VENDORS</p>
             <img id="icon2" className="transform rotate-180" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/sidebar2-svg7.svg" alt="arrow" />                    
