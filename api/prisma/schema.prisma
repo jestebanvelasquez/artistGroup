@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Persona {
+  id       String   @id @default(uuid())
+  name     String   @db.VarChar(255)
+  lastname String   @db.VarChar(255)
+  city     String   @db.VarChar(255)
+  country  String   @db.VarChar(255)
+  usuario  Usuario?
+}
+
+model Usuario {
+  id             String           @id @default(uuid())
+  email          String           @unique @db.VarChar(255)
+  password       String           @db.VarChar(255)
+  persona        Persona          @relation(fields: [idPersona], references: [id])
+  token          String?
+  idPersona      String           @unique
+  artista        Artista?
+  usuarioEventos UsuarioEventos[]
+  rolesUsuarios  RolesUsuarios[]
+  eventosCompras EventosCompras[]
+}
+
+model Artista {
+  id          String    @id @default(uuid())
+  name        String    @unique @db.VarChar(255)
+  descripcion String?   @db.VarChar(500)
+  img         String    @db.VarChar(255)
+  usuario     Usuario   @relation(fields: [idUsuario], references: [id])
+  idUsuario   String    @unique
+  eventos     Eventos[]
+}
+
+model Eventos {
+  id          String   @id @default(uuid())
+  name        String   @db.VarChar(255)
+  description String   @db.VarChar(500)
+  lugar       String   @db.VarChar(255)
+  imagesEvent String[]
+  duration    Float    @db.Real
+  isActive    Boolean  @default(false)
+  price       Float    @db.Real
+  tiempo      Tiempo   @default(horas)
+
+  artista           Artista             @relation(fields: [artistaId], references: [id])
+  artistaId         String
+  eventosCategorias EventosCategorias[]
+  UsuarioEventos    UsuarioEventos[]
+  eventosCompras    EventosCompras[]
+}
+
+enum Tiempo {
+  dias
+  horas
+  minutos
+}
+
+model UsuarioEventos {
+  usuario  Usuario @relation(fields: [userId], references: [id])
+  userId   String
+  eventos  Eventos @relation(fields: [idEvento], references: [id])
+  idEvento String
+
+  @@id([userId, idEvento])
+}
+
+model EventosCategorias {
+  eventos     Eventos    @relation(fields: [idEvento], references: [id])
+  idEvento    String
+  categorias  Categorias @relation(fields: [idCategoria], references: [id])
+  idCategoria String
+
+  @@id([idEvento, idCategoria])
+}
+
+model Categorias {
+  id                String              @id @default(uuid())
+  name              String              @db.VarChar(255)
+  eventosCategorias EventosCategorias[]
+}
+
+model Compras {
+  id            String           @id @default(uuid())
+  code          String           @db.VarChar(255)
+  eventoCompras EventosCompras[]
+}
+
+model EventosCompras {
+  id        String  @id @default(uuid())
+  eventos   Eventos @relation(fields: [idEvento], references: [id])
+  idEvento  String
+  compras   Compras @relation(fields: [idCompra], references: [id])
+  idCompra  String
+  usuarios  Usuario @relation(fields: [idUsuario], references: [id])
+  idUsuario String
+}
+
+model Roles {
+  id            String          @id @default(uuid())
+  nombre        String          @db.VarChar(255)
+  rolesUsuarios RolesUsuarios[]
+}
+
+model RolesUsuarios {
+  roles     Roles   @relation(fields: [idRol], references: [id])
+  idRol     String
+  usuarios  Usuario @relation(fields: [idUsuario], references: [id])
+  idUsuario String
+
+  @@id([idRol, idUsuario])
+}

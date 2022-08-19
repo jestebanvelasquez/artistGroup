@@ -1,0 +1,40 @@
+.containerHome {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+.containerContent {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.containerContentText {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.ContentText{
+    width: 100%;
+    text-align: center;
+}
+
+.containerContentImage {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.ContentImage{
+    width: 100%;
+    text-align: center;
+}
+
+.containerWave {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
