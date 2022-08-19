@@ -64,6 +64,9 @@ export const UsersSlice = createSlice({
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
+        getAll: (state, action: PayloadAction<usersArgs[]>) =>{
+            state.data = action.payload
+        },
         getByName: (state, action: PayloadAction<usersArgs[]>) => {
             state.data = action.payload;
         },
@@ -93,7 +96,7 @@ export const UsersSlice = createSlice({
     }, */
 });
 
-export const { getByName, getDetail,getRole } = UsersSlice.actions;
+export const { getAll, getByName, getDetail,getRole } = UsersSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

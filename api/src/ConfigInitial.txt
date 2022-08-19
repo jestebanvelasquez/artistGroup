@@ -23,3 +23,4 @@ npx prisma init
 npx prisma migrate dev --name init : crear las migraciones a la base de datos
 
 npm run tsc
+npx prisma generate

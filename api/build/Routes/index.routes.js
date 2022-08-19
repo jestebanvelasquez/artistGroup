@@ -6,10 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const { Router } = require('express');
 const router = Router();
 //Importar todos los routers
-const show_routes_1 = __importDefault(require("./Show/show.routes"));
-const category_routes_1 = __importDefault(require("./Category/category.routes"));
+const artist_routes_1 = __importDefault(require("./Artist/artist.routes"));
 const user_routes_1 = __importDefault(require("./User/user.routes"));
-router.use('/', show_routes_1.default);
-router.use('/', category_routes_1.default);
+const people_routes_1 = __importDefault(require("./People/people.routes"));
+const people_routes_2 = __importDefault(require("./People/people.routes"));
+router.use('/', artist_routes_1.default);
 router.use('/', user_routes_1.default);
+router.use('/', people_routes_1.default);
+router.use('/', people_routes_2.default);
 exports.default = router;

@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { isLogged, isLogout } from '../reducer/loggedSlice';
+import {  isLogged, isLogout } from '../reducer/loggedSlice';
 import { AppThunk } from "../store/store";
+import {getAll} from '../reducer/usersSlice'
 
 interface LoginUserProps {
     email: string;
@@ -39,3 +40,11 @@ export const ValidateToken = (): AppThunk => async (dispatch) => {
 
     }
 }
+
+export const getAllUsers = (): AppThunk => async (dispatch) => {
+    // dispatch(isLoading(true));
+    const { data } = await axios.get(`http://localhost:4000/user`);
+    dispatch(getAll(data));
+    // dispatch(isLoading(false));
+}
+

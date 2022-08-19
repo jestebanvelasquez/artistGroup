@@ -1,12 +1,14 @@
 import artistSlice from '../reducer/artistSlice';
-import users from '../reducer/usersSlice';
+import usersSlice from '../reducer/usersSlice';
+import eventsSlice from '../reducer/eventsSlice';
 import loggedSlice from '../reducer/loggedSlice';
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {
     artists: artistSlice,
-    users: users,
+    users: usersSlice,
+    events: eventsSlice,
     isLogged: loggedSlice
   }
 });

@@ -23,9 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const app_1 = __importDefault(require("./app"));
-const createCategories_1 = require("./utils/createCategories");
 const PORT = 4000;
 app_1.default.listen(PORT, () => {
-    (0, createCategories_1.createCategories)();
     console.log(`%s listening at ${PORT}`);
 });
