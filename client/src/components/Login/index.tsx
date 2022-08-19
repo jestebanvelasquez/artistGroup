@@ -2,7 +2,7 @@ import Navbar from "../Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch } from "../../redux/hooks/hooks";
-import { LoginUser } from "../../redux/actions/Users";
+import { LoginUser } from "../../redux/actions/users";
 
 export default function Login() {
     const dispatch = useAppDispatch();
