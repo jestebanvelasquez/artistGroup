@@ -1,4 +1,4 @@
-import Table from "./components/Table";
+import Table from "./components/TableMike";
 import IsLogged from "./components/isLogged";
 
 export default function AdminPanel() {

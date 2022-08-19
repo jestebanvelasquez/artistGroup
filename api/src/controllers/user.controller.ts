@@ -144,12 +144,14 @@ const userController = {
             const users = await prisma.usuario.findMany({
                 include: {
                     persona: true,
+                    rolesUsuarios: true,
                     eventosCompras: {
                         include: {
                             eventos: true
                         }
                     }
                 }
+
             })
             if (!users) {
                 throw 'No se encontraron resultados';

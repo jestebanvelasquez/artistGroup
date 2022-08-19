@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createCategories = void 0;
 const client_1 = require("@prisma/client");
-const prisma = new client_1.PrismaClient({ log: ['query', 'info'] });
+const prisma = new client_1.PrismaClient();
 const categorys = [
     { "name": "poesía" },
     { "name": "cuentos" },
@@ -28,14 +28,13 @@ const categorys = [
     { "name": "diversion infantil" }
 ];
 const createCategories = () => __awaiter(void 0, void 0, void 0, function* () {
-    const categorysDb = yield prisma.category.findMany();
+    const categorysDb = yield prisma.categorias.findMany();
     try {
         if (!categorysDb.length) {
             categorys.map((ele) => __awaiter(void 0, void 0, void 0, function* () {
-                yield prisma.category.create({
+                yield prisma.categorias.create({
                     data: {
                         name: ele.name,
-                        asignedBy: 'ADMIN'
                     }
                 });
             }));

@@ -9,7 +9,10 @@ import Register from "../components/Register/";
 import Pagos from "../components/pruebaPago/Pagos";
 import FormShow from '../components/Register/FormShow';
 import AdminPanel from "../components/AdminPanel";
-// import Contract from "../components/Contract";
+import DashBoard from "../components/DashBoard/DashBoard";
+import Detail from "../components/DashBoard/Detail";
+
+
 
 export default function App() {
 
@@ -28,8 +31,12 @@ export default function App() {
         <Route path='/createartist' element={<FormShow />} />
         <Route path='/AdminPanel' element={<AdminPanel />} />
         <Route path='/contract' element={<Pagos />} />
+        
+        <Route path='/dash' element={<DashBoard />} />
+        <Route path='/dash/:id' element={<Detail />} />
 
       </Routes>
+      
     </>
   )
 }
