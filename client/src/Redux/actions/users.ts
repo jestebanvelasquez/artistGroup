@@ -1,13 +1,7 @@
 import axios from 'axios';
-import Swal from 'sweetalert2';
-import { isLogged, isLogout } from '../reducer/loggedSlice';
+import { isLogout } from '../reducer/loggedSlice';
 import { AppThunk } from "../store/store";
 import { getAll } from '../reducer/usersSlice'
-
-interface LoginUserProps {
-    email: string;
-    password: string;
-}
 
 export const LogoutUser = (): AppThunk => async (dispatch) => {
     try {

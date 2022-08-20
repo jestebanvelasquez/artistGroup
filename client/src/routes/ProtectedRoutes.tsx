@@ -3,6 +3,23 @@ import axios from "axios";
 
 const useAuth = () => {
     const token = localStorage.getItem('auth-token');
+
+    (async () => {
+        //Obtener los roles del usuario
+        const roleResponse = await axios.get('http://localhost:4000/users/role', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        var roles: string[] = [];
+        roleResponse.data.map((rol: { roles: { nombre: string; }; }) => {
+            roles.push(rol.roles.nombre);
+        });
+
+        localStorage.setItem('role', JSON.stringify(roles));
+    })()
+
     let role = localStorage.getItem('role');
     role = JSON.parse(role!);
 

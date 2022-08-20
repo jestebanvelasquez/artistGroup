@@ -45,22 +45,6 @@ export default function Dashboard() {
     }
 
     const allEvents = () => {
-        (async () => {
-            const token = localStorage.getItem('auth-token');
-            //Obtener los roles del usuario
-            const roleResponse = await axios.get('http://localhost:4000/users/role', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            var roles: string[] = [];
-            roleResponse.data.map((rol: { roles: { nombre: string; }; }) => {
-                roles.push(rol.roles.nombre);
-            });
-
-            localStorage.setItem('role', JSON.stringify(roles));
-        })()
         //dispatch(getAllEvents())
         setView({
             home: false,
@@ -69,22 +53,6 @@ export default function Dashboard() {
         })
     }
     const allUsers = () => {
-        (async () => {
-            const token = localStorage.getItem('auth-token');
-            //Obtener los roles del usuario
-            const roleResponse = await axios.get('http://localhost:4000/users/role', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            var roles: string[] = [];
-            roleResponse.data.map((rol: { roles: { nombre: string; }; }) => {
-                roles.push(rol.roles.nombre);
-            });
-
-            localStorage.setItem('role', JSON.stringify(roles));
-        })()
         dispatch(getAllUsers())
         setView({
             home: false,

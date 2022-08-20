@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LogoutUser } from "../../../../redux/actions/Users";
 import { useAppDispatch } from "../../../../redux/hooks/hooks";
+import { LogoutUser } from "../../../../redux/actions/Users";
 import WithPermission from "../../../WithPermission";
 
 
