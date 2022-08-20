@@ -122,8 +122,8 @@ export default function NavAdmin({ searchName, setSearchName, allEvents, allUser
                 <div className="w-full px-4">
                     <hr className=" border-gray-100 w-full" />
                 </div>
-                <div className="mt-6 flex flex-col justify-start items-start  px-4 w-full space-y-3 pb-5 ">
-                    <button className="focus:outline-none flex justify-start items-center  hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  w-full ">
+                {/* <div className="mt-6 flex flex-col justify-start items-start  px-4 w-full space-y-3 pb-5 "> */}
+                    {/* <button className="focus:outline-none flex justify-start items-center  hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded py-3 pl-4  w-full ">
                         <div className="flex justify-between items-center  w-full">
                             <div className="flex justify-start items-center">
                                 <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,8 +133,8 @@ export default function NavAdmin({ searchName, setSearchName, allEvents, allUser
                             </div>
                             <div className="ml-28 p-1 bg-indigo-700 rounded-full"></div>
                         </div>
-                    </button>
-                    <button className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full ">
+                    </button> */}
+                    {/* <button className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full ">
                         <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M14 8C15.1046 8 16 7.10457 16 6C16 4.89543 15.1046 4 14 4C12.8954 4 12 4.89543 12 6C12 7.10457 12.8954 8 14 8Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                             <path d="M4 6H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -147,12 +147,12 @@ export default function NavAdmin({ searchName, setSearchName, allEvents, allUser
                             <path d="M19 18H20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         <p className="text-base leading-4  ">Settings</p>
-                    </button>
-                </div>
+                    </button> */}
+                {/* </div> */}
                 <div className="w-full px-4">
                     <hr className=" border-gray-100 w-full" />
                 </div>
-                <div className="mt-6 flex flex-col justify-start items-start  px-4 w-full space-y-3 pb-5 ">
+                {/* <div className="mt-6 flex flex-col justify-start items-start  px-4 w-full space-y-3 pb-5 ">
                     <button className="focus:outline-none flex justify-start items-center space-x-6 hover:text-white focus:bg-indigo-700 focus:text-white hover:bg-indigo-700 text-gray-600 rounded  py-3 pl-4  w-full ">
                         <svg width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 6H7C6.46957 6 5.96086 6.21071 5.58579 6.58579C5.21071 6.96086 5 7.46957 5 8V17C5 17.5304 5.21071 18.0391 5.58579 18.4142C5.96086 18.7893 6.46957 19 7 19H16C16.5304 19 17.0391 18.7893 17.4142 18.4142C17.7893 18.0391 18 17.5304 18 17V14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -160,7 +160,7 @@ export default function NavAdmin({ searchName, setSearchName, allEvents, allUser
                         </svg>
                         <p className="text-base leading-4  ">Notifications</p>
                     </button>
-                </div>
+                </div> */}
                 <div className="mt-36 flex  bg-indigo-700 justify-start space-x-2 items-center h-full py-4 px-3.5    w-full  ">
                     <div>
                         <img src="https://i.ibb.co/fxrbS6p/Ellipse-2-2.png" alt="avatar" />
