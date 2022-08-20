@@ -1,11 +1,10 @@
-import Navbar from "../Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useAppDispatch } from "../../redux/hooks/hooks";
-import { LoginUser } from "../../redux/actions/users";
+import axios from 'axios';
+import Swal from "sweetalert2";
+import Navbar from "../Navbar";
 
 export default function Login() {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const [input, setInput] = useState({
@@ -20,10 +19,45 @@ export default function Login() {
         });
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(LoginUser(input));
-        navigate('/adminPanel/');
+        try {
+            const loginResponse = await axios.post('http://localhost:4000/users/login', input)
+            localStorage.setItem('auth-token', loginResponse.data.token);
+
+            //Obtener los roles del usuario
+            const roleResponse = await axios.get('http://localhost:4000/users/role', {
+                headers: {
+                    Authorization: `Bearer ${loginResponse.data.token}`
+                }
+            });
+
+            var roles: string[] = [];
+            roleResponse.data.map((rol: { roles: { nombre: string; }; }) => {
+                roles.push(rol.roles.nombre);
+            });
+
+            localStorage.setItem('role', JSON.stringify(roles));
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Te has logeado exitosamente.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            //Move to dashboard
+            navigate('/dashboard/');
+        } catch (error: any) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: error.response.data.message,
+                showConfirmButton: true,
+                timer: 5000
+            });
+        }
     }
 
     return (

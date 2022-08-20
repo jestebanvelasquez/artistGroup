@@ -1,4 +1,4 @@
-import { useForm } from "../hooks/useForm"
+import { useForm } from "../../hooks/useForm"
 
 export default function Formulario2() {
 

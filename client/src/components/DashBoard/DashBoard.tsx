@@ -3,7 +3,7 @@ import React from 'react'
 import NavAdmin from './NavAdmin'
 import { useDispatch } from 'react-redux';
 import { getAllEvents } from '../../redux/actions/Events';
-import { getAllUsers } from '../../redux/actions/users';
+import { getAllUsers } from '../../redux/actions/Users';
 // import { useAppSelector } from '../../redux/hooks/hooks';
 import { useState } from 'react';
 import TableEvents from './Tables/TableEvents';
