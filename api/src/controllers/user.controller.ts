@@ -142,15 +142,42 @@ const userController = {
     getAll: async (_req: Request, res: Response, _next: NextFunction): Promise<any> => {
         try {
             const users = await prisma.usuario.findMany({
-                include: {
-                    persona: true,
-                    rolesUsuarios: true,
-                    eventosCompras: {
-                        include: {
-                            eventos: true
+                select: {
+                    id: true,
+                    email: true,
+                    token: true,
+                    isAvaliable: true,
+                    persona: {
+                        select: {
+                            id: true,
+                            name: true,
+                            lastname: true,
+                            city: true,
+                            country: true,
+                        }
+                    },
+                    rolesUsuarios: {
+                        select: {
+                            idRol: false,
+                            idUsuario: false,
+                            roles: {
+                                select: {
+                                    id: true,
+                                    nombre: true
+                                }
+                            }
                         }
                     }
                 }
+                // include: {
+                //     persona: true,
+                //     rolesUsuarios: true,
+                //     eventosCompras: {
+                //         include: {
+                //             eventos: true
+                //         }
+                //     }
+                // }
 
             })
             if (!users) {

@@ -1,12 +1,14 @@
-import axios from "axios";
+//import axios from "axios";
 import { useState } from "react";
 //import Table from "./components/Table";
 import Navbar from "./components/Navbar";
-import AllEvents from "./components/Administrador/AllEvents";
-import AllUsers from "./components/Administrador/AllUsers";
+//import AllEvents from "./components/Administrador/AllEvents";
+//import AllUsers from "./components/Administrador/AllUsers";
 import WithPermission from "../WithPermission";
 import { getAllUsers } from "../../redux/actions/Users";
 import { useAppDispatch } from "../../redux/hooks/hooks";
+import TableUsers from "./Tables/TableUsers";
+import TableEvents from "./Tables/TableEvents";
 
 export default function Dashboard() {
     // const events = useAppSelector(state => state.events.events)
@@ -21,22 +23,6 @@ export default function Dashboard() {
     })
 
     const home = () => {
-        (async () => {
-            const token = localStorage.getItem('auth-token');
-            //Obtener los roles del usuario
-            const roleResponse = await axios.get('http://localhost:4000/users/role', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-
-            var roles: string[] = [];
-            roleResponse.data.map((rol: { roles: { nombre: string; }; }) => {
-                roles.push(rol.roles.nombre);
-            });
-
-            localStorage.setItem('role', JSON.stringify(roles));
-        })()
         setView({
             home: true,
             tableUser: false,
@@ -63,7 +49,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <div className='flex flex-row flex-wrap bg-gray-100'>
+            <div className="flex flex-row flex-wrap bg-gray-100 w-full">
                 <Navbar home={home} allEvents={allEvents} allUsers={allUsers} />
                 {
                     view.home ?
@@ -72,11 +58,11 @@ export default function Dashboard() {
                         </WithPermission> :
                         view.tableEvent ?
                             <WithPermission roleRequired="ADMINISTRADOR">
-                                <AllUsers />
+                                <TableEvents />
                             </WithPermission> :
                             view.tableUser ?
                                 <WithPermission roleRequired="ADMINISTRADOR">
-                                    <AllEvents />
+                                    <TableUsers />
                                 </WithPermission> :
                                 'no hay nada'
                 }

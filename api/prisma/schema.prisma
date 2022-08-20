@@ -17,7 +17,6 @@ model Persona {
   lastname String   @db.VarChar(255)
   city     String   @db.VarChar(255)
   country  String   @db.VarChar(255)
-  isAvaliable Boolean  @default(true)
   usuario  Usuario?
 }
 
@@ -27,6 +26,7 @@ model Usuario {
   password       String           @db.VarChar(255)
   persona        Persona          @relation(fields: [idPersona], references: [id])
   token          String?
+  isAvaliable    Boolean          @default(true)
   idPersona      String           @unique
   artista        Artista?
   usuarioEventos UsuarioEventos[]
