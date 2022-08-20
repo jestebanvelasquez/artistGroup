@@ -4,7 +4,7 @@ import NavAdmin from './NavAdmin'
 import { useDispatch } from 'react-redux';
 import { getAllEvents } from '../../redux/actions/Events';
 import { getAllUsers } from '../../redux/actions/users';
-import { useAppSelector } from '../../redux/hooks/hooks';
+// import { useAppSelector } from '../../redux/hooks/hooks';
 import { useState } from 'react';
 import TableEvents from './Tables/TableEvents';
 import TableUsers from './Tables/TableUsers';
@@ -13,8 +13,8 @@ import TableUsers from './Tables/TableUsers';
 
 export default function DashBoard() {
 
-    const events = useAppSelector(state => state.events.events)
-    const users = useAppSelector(state => state.users.data)
+    // const events = useAppSelector(state => state.events.events)
+    // const users = useAppSelector(state => state.users.data)
 
     const [searchName , setSearchName] = useState('')
 
@@ -25,9 +25,9 @@ export default function DashBoard() {
 
     })
 
-    console.log(events);
-    console.log(users);
-    console.log(searchName);
+    // console.log(events);
+    // console.log(users);
+    // console.log(searchName);
 
 
     const dispatch = useDispatch()

@@ -43,7 +43,7 @@ export const ValidateToken = (): AppThunk => async (dispatch) => {
 
 export const getAllUsers = (): AppThunk => async (dispatch) => {
     // dispatch(isLoading(true));
-    const { data } = await axios.get(`http://localhost:4000/user`);
+    const { data } = await axios.get(`http://localhost:4000/users`);
     dispatch(getAll(data));
     // dispatch(isLoading(false));
 }

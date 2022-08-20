@@ -17,6 +17,7 @@ model Persona {
   lastname String   @db.VarChar(255)
   city     String   @db.VarChar(255)
   country  String   @db.VarChar(255)
+  isAvaliable Boolean  @default(true)
   usuario  Usuario?
 }
 
