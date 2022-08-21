@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../../redux/hooks/hooks";
 import { LogoutUser } from "../../../../redux/actions/Users";
@@ -6,10 +5,8 @@ import WithPermission from "../../../WithPermission";
 
 
 export default function NavbarDashboard({ home, allEvents, allUsers }: any) {
-    const [active, setIsActive] = useState(false);
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
-
 
     const logout = () => {
         dispatch(LogoutUser());

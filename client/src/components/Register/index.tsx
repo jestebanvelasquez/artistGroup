@@ -2,13 +2,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from "../Navbar";
 import { useState } from 'react';
-import { useAppDispatch } from '../../redux/hooks/hooks';
+//import { useAppDispatch } from '../../redux/hooks/hooks';
 import axios from 'axios';
 //import {getRole} from '../../redux/reducer/usersSlice'
 import Swal from 'sweetalert2';
 
 export default function CreateFormRe() {
-    const dispatch = useAppDispatch();
+    //const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [input, setInput] = useState({
         userName: '',
@@ -186,7 +186,7 @@ export default function CreateFormRe() {
                             className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                             required />
                     </div>
-                    <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Estoy de acuerdo con los  <a href="#" className="text-red-600 hover:underline dark:text-red-500">terminos y condiciones</a>.</label>
+                    <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-400">Estoy de acuerdo con los  <Link to="#" className="text-red-600 hover:underline dark:text-red-500">terminos y condiciones</Link>.</label>
                 </div>
                 <div className="mb-6 text-center">
                     <button
@@ -196,13 +196,11 @@ export default function CreateFormRe() {
                         Registrar cuenta
                     </button>
                 </div>
-                <Link to='/login'>
-                    <div className="text-center">
-                        <p className="inline-block text-sm text-red-500 font-semibold align-baseline hover:text-blue-800">
-                            ¿Ya tienes una cuenta? Ingresa!
-                        </p>
-                    </div>
-                </Link>
+                <div className="text-center">
+                    <Link to='/login' className="inline-block text-sm text-red-500 font-semibold align-baseline hover:text-blue-800">
+                        ¿Ya tienes una cuenta? Ingresa!
+                    </Link>
+                </div>
             </form>
         </div>
     )

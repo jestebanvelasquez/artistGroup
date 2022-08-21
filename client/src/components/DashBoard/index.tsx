@@ -7,8 +7,8 @@ import Navbar from "./components/Navbar";
 import WithPermission from "../WithPermission";
 import { getAllUsers } from "../../redux/actions/Users";
 import { useAppDispatch } from "../../redux/hooks/hooks";
-import TableUsers from "./Tables/TableUsers";
-import TableEvents from "./Tables/TableEvents";
+import TableUsers from "./components/Administrador/TableUsers";
+import TableEvents from "./components/Administrador/TableEvents";
 
 export default function Dashboard() {
     // const events = useAppSelector(state => state.events.events)

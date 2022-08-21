@@ -9,8 +9,8 @@ import Login from "../components/Login";
 import Register from "../components/Register/";
 
 import Dashboard from "../components/Dashboard";
-import AdminView from "../components/Dashboard/components/Administrador";
-import ArtistView from "../components/Dashboard/components/Artist";
+//import AdminView from "../components/Dashboard/components/Administrador";
+//import ArtistView from "../components/Dashboard/components/Artist";
 
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes"
@@ -34,12 +34,12 @@ const MainRoutes = () => (
         <Route path="/" element={<ProtectedRoutes roleRequired="USUARIO" />}>
             <Route path="/dashboard" element={<Dashboard />} />
         </Route>
-        <Route path="/" element={<ProtectedRoutes roleRequired="ADMINISTRADOR" />}>
+        {/* <Route path="/" element={<ProtectedRoutes roleRequired="ADMINISTRADOR" />}>
             <Route path='/dashboard/admin' element={<AdminView />} />
         </Route>
         <Route path="/" element={<ProtectedRoutes roleRequired="ARTISTA" />}>
             <Route path='/dashboard/artist' element={<ArtistView />} />
-        </Route>
+        </Route> */}
 
         {/** Permission denied route */}
         <Route path="/denied" element={<PermissionDenied />} />
