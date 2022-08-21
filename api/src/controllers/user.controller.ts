@@ -214,7 +214,25 @@ const userController = {
                 message: error
             });
         }
-    }
+    },
+    putAvaliable:  async (req: Request, res: Response, _next: NextFunction): Promise<any>=>{
+        const idUser = req.params.id ;
+        const {boolean} = req.body
+
+        try {
+            await prisma.usuario.update({
+                where: { id: idUser },
+                data: { isAvaliable: boolean }
+            
+            })
+            
+            const user = await prisma.persona.findUnique({where: {id:idUser}}) 
+            res.send(user)
+            
+        } catch (error) {
+            res.send(error)
+        }
+    } 
 }
 
 export default userController;

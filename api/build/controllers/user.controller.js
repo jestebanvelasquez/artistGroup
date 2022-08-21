@@ -153,14 +153,42 @@ const userController = {
     getAll: (_req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const users = yield prisma.usuario.findMany({
-                include: {
-                    persona: true,
-                    eventosCompras: {
-                        include: {
-                            eventos: true
+                select: {
+                    id: true,
+                    email: true,
+                    token: true,
+                    isAvaliable: true,
+                    persona: {
+                        select: {
+                            id: true,
+                            name: true,
+                            lastname: true,
+                            city: true,
+                            country: true,
+                        }
+                    },
+                    rolesUsuarios: {
+                        select: {
+                            idRol: false,
+                            idUsuario: false,
+                            roles: {
+                                select: {
+                                    id: true,
+                                    nombre: true
+                                }
+                            }
                         }
                     }
                 }
+                // include: {
+                //     persona: true,
+                //     rolesUsuarios: true,
+                //     eventosCompras: {
+                //         include: {
+                //             eventos: true
+                //         }
+                //     }
+                // }
             });
             if (!users) {
                 throw 'No se encontraron resultados';
@@ -191,9 +219,6 @@ const userController = {
                     idUsuario: token.id
                 }
             });
-            if (role && role.length === 0) {
-                throw 'Al parecer el usuario consultado no tiene roles inscritos.';
-            }
             res.status(200).send(role);
         }
         catch (error) {
