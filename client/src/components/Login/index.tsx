@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import axios from 'axios';
 import Swal from "sweetalert2";
 import Navbar from "../Navbar";
+import { RUTA_APP } from "../..";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -22,11 +23,11 @@ export default function Login() {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const loginResponse = await axios.post('http://localhost:4000/users/login', input)
+            const loginResponse = await axios.post(`${RUTA_APP}users/login`, input)
             localStorage.setItem('auth-token', loginResponse.data.token);
 
             //Obtener los roles del usuario
-            const roleResponse = await axios.get('http://localhost:4000/users/role', {
+            const roleResponse = await axios.get(`${RUTA_APP}users/role`, {
                 headers: {
                     Authorization: `Bearer ${loginResponse.data.token}`
                 }

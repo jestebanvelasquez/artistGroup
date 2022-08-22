@@ -14,36 +14,36 @@ export default function Login() {
     const navigate = useNavigate()
 
     interface IUser {
-        email : string
+        email: string
         password: string
-    } 
+    }
 
     const [input, setInput] = useState<IUser>({
-        email:'',
-        password:''
+        email: '',
+        password: ''
     })
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>)=>{
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInput({
             ...input,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
     // console.log(input);
-    const handleSubmit = async(e) =>{
+    const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-        
+
             const response = await axios({
-                url: 'http://localhost:4000/signin',
+                url: `${RUTA_APP}signin`,
                 method: 'POST',
-                data:input
-                
+                data: input
+
             })
             dipatch(getRole(response.data))
-            localStorage.setItem('auth-token',response.data.token );
+            localStorage.setItem('auth-token', response.data.token);
             localStorage.setItem('role', response.data.rol)
-            Swal.fire({ 
+            Swal.fire({
                 position: 'center',
                 icon: 'success',
                 title: `${input.email} logeado correctamente`,
@@ -51,14 +51,14 @@ export default function Login() {
                 timer: 1500
             })
             setInput({
-                email:'',
-                password:''
+                email: '',
+                password: ''
             })
-            if(response.data.rol==='ARTIST'){
+            if (response.data.rol === 'ARTIST') {
                 navigate('/createartist')
-            }else if(response.data.rol === 'ADMIN'){
+            } else if (response.data.rol === 'ADMIN') {
                 navigate('/AdminPanel')
-            }else if (response.data.rol === 'CONTRACTOR'){
+            } else if (response.data.rol === 'CONTRACTOR') {
                 navigate('/shows')
             }
         } catch (error) {
@@ -149,7 +149,7 @@ export default function Login() {
                                     placeholder="Correo electronico"
                                     value={input.email}
                                     name='email'
-                                    onChange={(e)=> handleChange(e)}
+                                    onChange={(e) => handleChange(e)}
                                 />
                             </div>
 

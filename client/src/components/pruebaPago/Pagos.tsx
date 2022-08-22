@@ -35,7 +35,7 @@ const CheckoutForm = () => {
             })
             if (paymentMethod) {
                 const { id } = paymentMethod
-                const { data } = await axios.post('http://localhost:4000/buy', {
+                const { data } = await axios.post(`${RUTA_APP}buy`, {
                     id,
                     amount: product.price
                 })

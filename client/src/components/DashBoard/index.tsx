@@ -9,6 +9,7 @@ import { getAllUsers } from "../../redux/actions/Users";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import TableUsers from "./components/Administrador/TableUsers";
 import TableEvents from "./components/Administrador/TableEvents";
+import AsignarRol from "./components/Administrador/AsignarRol";
 
 export default function Dashboard() {
     // const events = useAppSelector(state => state.events.events)
@@ -17,6 +18,7 @@ export default function Dashboard() {
 
     const [view, setView] = useState({
         home: true,
+        asignarRol: false,
         tableUser: false,
         tableEvent: false
         // tableUser: false
@@ -25,6 +27,7 @@ export default function Dashboard() {
     const home = () => {
         setView({
             home: true,
+            asignarRol: false,
             tableUser: false,
             tableEvent: false
         })
@@ -34,6 +37,7 @@ export default function Dashboard() {
         //dispatch(getAllEvents())
         setView({
             home: false,
+            asignarRol: false,
             tableUser: false,
             tableEvent: true
         })
@@ -42,7 +46,17 @@ export default function Dashboard() {
         dispatch(getAllUsers())
         setView({
             home: false,
+            asignarRol: false,
             tableUser: true,
+            tableEvent: false
+        })
+    }
+
+    const asignarRol = () => {
+        setView({
+            home: false,
+            asignarRol: true,
+            tableUser: false,
             tableEvent: false
         })
     }
@@ -50,21 +64,25 @@ export default function Dashboard() {
     return (
         <>
             <div className="flex flex-row flex-wrap bg-gray-100 w-full">
-                <Navbar home={home} allEvents={allEvents} allUsers={allUsers} />
+                <Navbar home={home} asignarRol={asignarRol} allEvents={allEvents} allUsers={allUsers} />
                 {
                     view.home ?
                         <WithPermission roleRequired="USUARIO">
                             <h2>Este es un mensaje principal</h2>
                         </WithPermission> :
-                        view.tableEvent ?
+                        view.asignarRol ?
                             <WithPermission roleRequired="ADMINISTRADOR">
-                                <TableEvents />
+                                <AsignarRol />
                             </WithPermission> :
-                            view.tableUser ?
+                            view.tableEvent ?
                                 <WithPermission roleRequired="ADMINISTRADOR">
-                                    <TableUsers />
+                                    <TableEvents />
                                 </WithPermission> :
-                                'no hay nada'
+                                view.tableUser ?
+                                    <WithPermission roleRequired="ADMINISTRADOR">
+                                        <TableUsers />
+                                    </WithPermission> :
+                                    'no hay nada'
                 }
             </div>
         </>
