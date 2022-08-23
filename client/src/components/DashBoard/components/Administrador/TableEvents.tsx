@@ -29,7 +29,7 @@ export default function TableEvents() {
     }
 
     return (
-        <div className="w-9/12 h-screen">
+        <>
             <div className="w-full h-full p-4">
                 <h1>Table Events</h1>
                 <table className="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
@@ -63,7 +63,7 @@ export default function TableEvents() {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </>
     )
 }
 

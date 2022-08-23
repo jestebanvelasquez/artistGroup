@@ -1,89 +1,53 @@
-//import axios from "axios";
-import { useState } from "react";
-//import Table from "./components/Table";
-import Navbar from "./components/Navbar";
-//import AllEvents from "./components/Administrador/AllEvents";
-//import AllUsers from "./components/Administrador/AllUsers";
+import { useEffect, useState } from "react";
+import NavbarDashboard from "./components/NavbarDashboard";
 import WithPermission from "../WithPermission";
-import { getAllUsers } from "../../redux/actions/Users";
-import { useAppDispatch } from "../../redux/hooks/hooks";
-import TableUsers from "./components/Administrador/TableUsers";
-import TableEvents from "./components/Administrador/TableEvents";
-import AsignarRol from "./components/Administrador/AsignarRol";
+import ViewUsuario from "./components/Usuario";
+import ViewAdmin from "./components/Administrador";
+import ViewArtist from "./components/Artist"
+
+export interface ViewProps {
+    [key: string]: boolean;
+}
 
 export default function Dashboard() {
-    // const events = useAppSelector(state => state.events.events)
-    // const users = useAppSelector(state => state.users.data)
-    const dispatch = useAppDispatch();
 
-    const [view, setView] = useState({
+    const [view, setView] = useState<ViewProps>({
         home: true,
         asignarRol: false,
         tableUser: false,
+        tableUserDisabled: false,
         tableEvent: false
-        // tableUser: false
-    })
+    });
 
-    const home = () => {
-        setView({
-            home: true,
-            asignarRol: false,
-            tableUser: false,
-            tableEvent: false
-        })
-    }
-
-    const allEvents = () => {
-        //dispatch(getAllEvents())
-        setView({
-            home: false,
-            asignarRol: false,
-            tableUser: false,
-            tableEvent: true
-        })
-    }
-    const allUsers = () => {
-        dispatch(getAllUsers())
-        setView({
-            home: false,
-            asignarRol: false,
-            tableUser: true,
-            tableEvent: false
-        })
-    }
-
-    const asignarRol = () => {
-        setView({
-            home: false,
-            asignarRol: true,
-            tableUser: false,
-            tableEvent: false
-        })
+    const changeView = (prop: string) => {
+        for (var name in view) {
+            view[name] = false;
+            view[prop] = true;
+        }
+        setView(() => {
+            return {
+                ...view
+            }
+        });
     }
 
     return (
         <>
             <div className="flex flex-row flex-wrap bg-gray-100 w-full">
-                <Navbar home={home} asignarRol={asignarRol} allEvents={allEvents} allUsers={allUsers} />
-                {
-                    view.home ?
-                        <WithPermission roleRequired="USUARIO">
-                            <h2>Este es un mensaje principal</h2>
-                        </WithPermission> :
-                        view.asignarRol ?
-                            <WithPermission roleRequired="ADMINISTRADOR">
-                                <AsignarRol />
-                            </WithPermission> :
-                            view.tableEvent ?
-                                <WithPermission roleRequired="ADMINISTRADOR">
-                                    <TableEvents />
-                                </WithPermission> :
-                                view.tableUser ?
-                                    <WithPermission roleRequired="ADMINISTRADOR">
-                                        <TableUsers />
-                                    </WithPermission> :
-                                    'no hay nada'
-                }
+                <NavbarDashboard changeView={(value: string) => changeView(value)} />
+
+                <WithPermission roleRequired={["ADMINISTRADOR"]}>
+                    <ViewAdmin view={view} />
+                </WithPermission>
+
+                <WithPermission roleRequired={["ARTISTA"]}>
+                    <ViewArtist view={view} />
+                </WithPermission>
+
+                <WithPermission roleRequired={["USUARIO"]}>
+                    <ViewUsuario view={view} />
+                </WithPermission>
+
             </div>
         </>
     )

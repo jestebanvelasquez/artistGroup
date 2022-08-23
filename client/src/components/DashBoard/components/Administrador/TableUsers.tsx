@@ -1,15 +1,19 @@
-import { useAppSelector } from '../../../../redux/hooks/hooks';
+import { useEffect } from 'react';
+import { getAllUsers } from '../../../../redux/actions/Users';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks/hooks';
 
 export default function TableUsers() {
-
+    const dispatch = useAppDispatch();
     const users = useAppSelector(state => state.users.data);
 
-    console.log(users);
+    useEffect(() => {
+        dispatch(getAllUsers());
+    }, [dispatch]);
 
     const head = ['Names', 'email', 'Rol', 'Ubication', 'Available', 'Options']
 
     return (
-        <div className="w-9/12 h-screen">
+        <>
             <div className="w-full h-full p-4 overflow-auto">
                 <p className="text-4xl text-center font-bold mb-5">Table Users</p>
                 <table className="divide-y divide-gray-200 table-fixed dark:divide-gray-700">
@@ -44,7 +48,7 @@ export default function TableUsers() {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </>
     )
 }
 

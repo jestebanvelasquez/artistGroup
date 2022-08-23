@@ -29,7 +29,6 @@ export default function Login() {
             [e.target.name]: e.target.value
         })
     }
-    // console.log(input);
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -63,7 +62,6 @@ export default function Login() {
             }
         } catch (error) {
             Swal.fire(error.response.data.error)
-            // console.log(error);
         }
     }
 

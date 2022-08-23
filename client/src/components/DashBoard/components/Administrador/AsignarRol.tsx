@@ -29,7 +29,6 @@ export default function AsignarRol() {
     }, [dispatch]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        console.log(e.target.value);
         setInput({
             ...input,
             [e.target.name]: e.target.value
@@ -38,11 +37,10 @@ export default function AsignarRol() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(input);
     }
 
     return (
-        <div className="w-9/12 h-screen">
+        <>
             <div className="w-full h-full p-4">
                 <div className="mb-10">
                     <p className="text-2xl font-extralight text-center">En este módulo se puede asignar un rol a un usuario, primero selecciona el usuario y luego el rol que quieres asignarle, puedes ver la información de los usuarios en la sección de <strong className="font-extrabold">All Users</strong></p>
@@ -81,6 +79,6 @@ export default function AsignarRol() {
                     </div>
                 </form>
             </div>
-        </div>
+        </>
     )
 }
