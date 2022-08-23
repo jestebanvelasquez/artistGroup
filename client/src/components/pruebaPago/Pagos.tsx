@@ -33,13 +33,15 @@ const CheckoutForm = () => {
                 type: 'card',
                 card: elements?.getElement(CardElement)
             })
+            if (err) {
+                console.log(err);
+            }
             if (paymentMethod) {
                 const { id } = paymentMethod
-                const { data } = await axios.post('http://localhost:4000/buy', {
+                const { data } = await axios.post(`${RUTA_APP}buy`, {
                     id,
                     amount: product.price
                 })
-                // console.log(data);
                 if (data.success) {
                     Swal.fire({
                         position: 'center',

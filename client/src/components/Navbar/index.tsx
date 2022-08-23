@@ -1,9 +1,8 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Filters from "../Filters";
 import Modal from "../Modal";
 
 export default function Navbar() {
-    const navigate = useNavigate()
 
     const navLinkStyles = ({ isActive }: any) => {
         return {

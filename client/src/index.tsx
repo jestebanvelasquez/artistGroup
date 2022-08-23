@@ -6,6 +6,7 @@ import { store } from "./redux/store/store";
 
 import App from "./container/App";
 import './index.css';
+export const RUTA_APP = "http://localhost:4000/";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
