@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
-import { ArtistArgs } from "../../redux/reducer/artistSlice";
+import { AllArtistProps } from "../../redux/reducer/artistSlice";
 
 interface ArtistProps {
-    artists: ArtistArgs[]
+    artists: AllArtistProps[]
 }
 
 export const CardArtists: React.FC<ArtistProps> = ({ artists }) => {
 
     return (
-        <div className="flex flex-row flex-wrap bg-gray-100" style={{zIndex: '0'}}>
+        <div className="flex flex-row flex-wrap bg-gray-100" style={{ zIndex: '0' }}>
             {artists && artists.length > 0 ? artists.map((ele, i) => {
                 return (
-                    <div key={i} className="flex flex-row flex-wrap w-1/3" style={{zIndex: '8'}}>
+                    <div key={i} className="flex flex-row flex-wrap w-1/3" style={{ zIndex: '8' }}>
                         <div className="flex flex-col items-center w-full m-9 bg-white rounded-md shadow-md duration-300 hover:scale-105 hover:shadow-xl">
                             <div className="w-full h-80">
                                 <img src={ele.img} className="w-full h-full object-cover object-top rounded-full p-7" alt="" />

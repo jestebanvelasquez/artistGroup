@@ -1,9 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from "../Navbar";
 import { useState } from 'react';
-//import { useAppDispatch } from '../../redux/hooks/hooks';
-import { createUser } from '../../redux/actions/Users';
+import { createUser, getAllUsers } from '../../redux/actions/Users';
 import Swal from 'sweetalert2';
+import { useAppDispatch } from '../../redux/hooks/hooks';
 
 export interface FormRegisterProps {
     name: string;
@@ -19,7 +19,7 @@ export interface FormRegisterProps {
 }
 
 export default function Register() {
-    //const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [input, setInput] = useState<FormRegisterProps>({
         name: '',
@@ -46,6 +46,9 @@ export default function Register() {
         try {
             createUser(input)
                 .then(() => {
+                    //Me vuelva a cargar los usuarios
+                    dispatch(getAllUsers());
+                    //Redireccionar al login
                     navigate('/login');
                     //Restart values form
                     setInput({

@@ -1,5 +1,5 @@
 import { AppThunk } from "../store/store";
-import { getAll, getByName, getDetail, isLoading } from "../reducer/artistSlice";
+import { getAll, getByName, getDetail, isLoading, loadEventsArtist } from "../reducer/artistSlice";
 import axios from 'axios';
 import { RUTA_APP } from "../..";
 

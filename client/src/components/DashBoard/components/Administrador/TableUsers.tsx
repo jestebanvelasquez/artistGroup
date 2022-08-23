@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../../redux/hooks/hooks';
 
 export default function TableUsers() {
     const dispatch = useAppDispatch();
-    const users = useAppSelector(state => state.users.data);
+    const users = useAppSelector(state => state.dashboard.users);
 
     useEffect(() => {
         dispatch(getAllUsers());
@@ -32,12 +32,12 @@ export default function TableUsers() {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         {
-                            users.map((user, i) => {
+                            users.map((user: any, i: number) => {
                                 return (
                                     <tr key={i}>
                                         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">{user.persona.name} {user.persona.lastname}</td>
                                         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">{user.email}</td>
-                                        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">{user.rolesUsuarios.map(rol => `${rol.roles.nombre}, `)}</td>
+                                        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">{user.rolesUsuarios.map((rol: any) => `${rol.roles.nombre}, `)}</td>
                                         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">{user.persona.city} - {user.persona.country}</td>
                                         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">{user.isAvaliable ? "true" : "false"}</td>
                                         <td className="py-4 px-6 text-sm font-medium text-blue-600 whitespace-nowrap cursor-pointer">{user.isAvaliable ? "Deshabilitar" : "Habilitar"}</td>

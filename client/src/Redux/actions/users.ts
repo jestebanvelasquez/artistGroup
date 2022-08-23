@@ -102,6 +102,11 @@ export const createUser = async (arr: FormRegisterProps) => {
         });
 }
 
+export const getAllUsers = (): AppThunk => async (dispatch) => {
+    const { data } = await axios.get(`${RUTA_APP}users`);
+    dispatch(getAll(data));
+}
+
 export const LogoutUser = async () => {
     try {
 
@@ -136,11 +141,6 @@ export const ValidateToken = async () => {
     } catch (error) {
 
     }
-}
-
-export const getAllUsers = (): AppThunk => async (dispatch) => {
-    const { data } = await axios.get(`${RUTA_APP}users`);
-    dispatch(getAll(data));
 }
 
 export const getRoleByToken = async () => {

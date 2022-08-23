@@ -10,8 +10,7 @@ import Navbar from "../Navbar";
 export default function AllArtists() {
 
     const dispatch = useAppDispatch();
-    const artistState = useAppSelector((state: RootState) => state.artists.artists);
-    //const loginRole = useAppSelector((state:RootState)=> state.users.role.rol)
+    const artist = useAppSelector((state: RootState) => state.artists.data);
     const [searchParams] = useSearchParams();
 
     useEffect(() => {
@@ -23,22 +22,16 @@ export default function AllArtists() {
     }, [dispatch, searchParams]);
 
     useEffect(() => {
-        if (artistState && artistState.length === 0) {
-            dispatch(getAllArtists())
-        }
-    }, [dispatch, artistState]);
+        dispatch(getAllArtists());
+    }, [dispatch]);
 
 
     return (
         <>
             <Navbar />
-            {/* <div>
-                {loginRole  ? <div className="container">
-                <CardShows shows={shows} />
-            </div> : <div><h1>no tienes permisos</h1></div>}
-            </div> */}
+
             <div className="container">
-                <CardArtists artists={artistState} />
+                <CardArtists artists={artist} />
             </div>
         </>
     )

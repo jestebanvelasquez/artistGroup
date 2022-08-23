@@ -16,7 +16,7 @@ interface FormRoleProps {
 
 export default function AsignarRol() {
     const dispatch = useAppDispatch();
-    const users = useAppSelector((state: RootState) => state.users.data);
+    const users = useAppSelector((state: RootState) => state.dashboard.users);
     const [roles, setRoles] = useState<RolesProps[]>();
     const [input, setInput] = useState<FormRoleProps>({
         idUsuario: "",
@@ -56,7 +56,7 @@ export default function AsignarRol() {
                                 defaultValue="" required>
                                 <option value="" disabled>Seleccionar una opción</option>
                                 {
-                                    users && users.map(user => <option key={user.id} value={user.id}>{user.persona.name} {user.persona.lastname}</option>)
+                                    users && users.map((user: any) => <option key={user.id} value={user.id}>{user.persona.name} {user.persona.lastname}</option>)
                                 }
                             </select>
                         </div>

@@ -169,17 +169,7 @@ const userController = {
                         }
                     }
                 }
-                // include: {
-                //     persona: true,
-                //     rolesUsuarios: true,
-                //     eventosCompras: {
-                //         include: {
-                //             eventos: true
-                //         }
-                //     }
-                // }
-
-            })
+            });
             if (!users) {
                 throw 'No se encontraron resultados';
             }

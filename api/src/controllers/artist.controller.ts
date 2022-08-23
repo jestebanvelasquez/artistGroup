@@ -29,12 +29,10 @@ const artistController = {
                 }
             } else {
                 const artists = await prisma.artista.findMany({
-                    include: {
-                        usuario: {
-                            include: {
-                                persona: true
-                            }
-                        }
+                    select: {
+                        id: true,
+                        name: true,
+                        img: true
                     }
                 });
                 if (artists.length > 0) {
@@ -53,25 +51,25 @@ const artistController = {
         const { id } = req.params;
         try {
             const artist = await prisma.artista.findFirst({
-                where: {
-                    id
-                },
-                include: {
+                select: {
+                    id: true,
+                    name: true,
+                    descripcion: true,
+                    img: true,
                     usuario: {
-                        include: {
-                            persona: true
-                        }
-                    },
-                    eventos: {
-                        include: {
-                            eventosCategorias: {
-                                include: {
-                                    categorias: true
+                        select: {
+                            persona: {
+                                select: {
+                                    name: true,
+                                    lastname: true,
+                                    city: true,
+                                    country: true
                                 }
                             }
                         }
                     }
-                }
+                },
+                where: { id }
             });
             if (artist) {
                 return res.status(200).json(artist);
@@ -85,7 +83,7 @@ const artistController = {
         }
     },
     createArtist: async (req: Request, res: Response, _next: NextFunction): Promise<any> => {
-        const { name, img, idUsuario } = req.body;
+        const { name, img, descripcion, idUsuario } = req.body;
         try {
             const isUsuario = await prisma.usuario.findUnique({
                 where: { id: idUsuario }
@@ -109,6 +107,7 @@ const artistController = {
                 data: {
                     name: `${name}`,
                     img: `${img}`,
+                    descripcion: `${descripcion}`,
                     idUsuario: `${idUsuario}`
                 }
             });

@@ -1,11 +1,12 @@
 import Navbar from "../Navbar";
+import CardCategories from "./cardCategories";
 
 export default function Categories() {
     return (
         <>
             <Navbar />
             <div className="container">
-                <h1 className="bg-gray-800 text-white">Categories component</h1>
+                <CardCategories />
             </div>
         </>
     )
