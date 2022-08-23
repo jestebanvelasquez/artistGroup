@@ -4,18 +4,14 @@ import { getArtistDetail } from '../../redux/actions/Artists';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { RootState } from '../../redux/store/store';
 import EventsArtist from '../EventsArtist';
+
 import Navbar from '../Navbar';
 
-type props ={
-    price?:string,
-    pagar?:number
-}
-
-export default function ArtistDetail(props:props) {
+export default function ArtistDetail() {
     const dispatch = useAppDispatch();
     const detailState = useAppSelector((state: RootState) => state.artists.detail);
     const { id } = useParams();
-    console.log(props.pagar)
+
     useEffect(() => {
         dispatch(getArtistDetail(String(id)));
     }, [dispatch]);
@@ -52,25 +48,11 @@ export default function ArtistDetail(props:props) {
                                         <p className="text-xl font-extrabold">Nacionalidad</p>
                                         <p className="text-base font-light">{detailState[0].usuario.persona.city} - {detailState[0].usuario.persona.country}</p>
                                     </div>
-                                    {/* <div>
-                                        <button className="flex flex-row items-center justify-center px-5 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 active:scale-95 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:cursor-not-allowed transition-colors duration-200">Me interesa <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                        </svg></button>
-                                    </div> */}
-                                    {
-                                        !props.pagar? 
-                                        <div>
+                                    <div>
                                         <button className="flex flex-row items-center justify-center px-5 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 active:scale-95 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:cursor-not-allowed transition-colors duration-200">Me interesa <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                         </svg></button>
                                     </div>
-                                    : 
-                                    <div>
-                                     <button className="flex flex-row items-center justify-center px-5 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 active:scale-95 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:cursor-not-allowed transition-colors duration-200">Me interesa <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                     </svg>
-                                     </button>
-                                 </div>}
                                 </div>
                             </div>
                         </div>
