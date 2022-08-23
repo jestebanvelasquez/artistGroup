@@ -14,7 +14,7 @@ export default function ArtistDetail() {
 
     useEffect(() => {
         dispatch(getArtistDetail(String(id)));
-    }, [dispatch]);
+    }, [id, dispatch]);
 
     return (
         <div>

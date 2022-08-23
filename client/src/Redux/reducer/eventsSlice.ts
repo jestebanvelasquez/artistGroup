@@ -1,20 +1,19 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store/store';
 
-
 export interface Evento {
-        artistaId: string;
-        description: string;
-        duration: number;
-        eventosCategorias: EventosCategoria[];
-        id: string;
-        imagesEvent: string[];
-        isActive: boolean;
-        lugar: string;
-        name: string;
-        price: number;
-        tiempo: string;
-    }
+    artistaId: string;
+    description: string;
+    duration: number;
+    eventosCategorias: EventosCategoria[];
+    id: string;
+    imagesEvent: string[];
+    isActive: boolean;
+    lugar: string;
+    name: string;
+    price: number;
+    tiempo: string;
+}
 
 export interface Categorias {
     id: string;
@@ -26,8 +25,6 @@ export interface EventosCategoria {
     idCategoria: string;
     idEvento: string;
 }
-
-
 
 export interface EventState {
     events: Evento[],

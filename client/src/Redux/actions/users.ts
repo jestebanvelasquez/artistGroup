@@ -43,21 +43,13 @@ export const createUser = async (arr: FormRegisterProps) => {
             //Se crea el artista
             let idUser = userData!.data.user.id;
             if (idUser && arr.isArtist === 'true') {
-                //Si es artista se le crea el rol de artista y de usuario también
-                getRoleByName('USUARIO')
+                //Si es artista se le crea el rol de artista
+                getRoleByName('ARTISTA')
                     .then(roles => {
                         let idRol = roles[0].id;
                         if (idRol) {
-                            return asignarRol({ idUsuario: idUser, idRol });
+                            return asignarRol({ idUsuario: idUser, idRol })
                         }
-                    }).then(() => {
-                        getRoleByName('ARTISTA')
-                            .then(roles => {
-                                let idRol = roles[0].id;
-                                if (idRol) {
-                                    return asignarRol({ idUsuario: idUser, idRol })
-                                }
-                            })
                     }).catch(error => {
                         console.log(error);
                         Swal.fire({

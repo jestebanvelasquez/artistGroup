@@ -1,9 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 //import { RootState } from '../store/store';
-import { isSomeAsyncActionsFulfilled, isSomeAsyncActionsPending, isSomeAsyncActionsRejected } from '../helpers';
-import { RootState } from '../store/store';
-//import { getAllShows } from '../thunks/show';
-//import { incrementAsync, otherIncrementAsync } from '../thunks/counter';
 
 export interface UserProps {
     email: string;
@@ -30,7 +26,6 @@ export interface Roles {
     id: string;
     nombre: string;
 }
-
 
 export type UserState = {
     data: UserProps[]

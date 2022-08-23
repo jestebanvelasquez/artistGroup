@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks"
 import { RootState } from "../../redux/store/store";
 import { getAllArtists, getArtistByName } from "../../redux/actions/Artists";
-//import { ArtistArgs } from "../../redux/reducer/artistSlice";
 
 import { CardArtists } from "./cardArtists";
 import Navbar from "../Navbar";
@@ -27,7 +26,7 @@ export default function AllArtists() {
         if (artistState && artistState.length === 0) {
             dispatch(getAllArtists())
         }
-    }, [artistState]);
+    }, [dispatch, artistState]);
 
 
     return (
