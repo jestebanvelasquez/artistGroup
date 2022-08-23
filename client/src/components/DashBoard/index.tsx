@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import NavbarDashboard from "./components/NavbarDashboard";
 import WithPermission from "../WithPermission";
 import ViewUsuario from "./components/Usuario";
