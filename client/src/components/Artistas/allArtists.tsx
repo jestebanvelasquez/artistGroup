@@ -17,6 +17,10 @@ export default function AllArtists() {
         if (searchParams.get("name") !== null) {
             //Get Artists By Name
             dispatch(getArtistByName(searchParams.get("name")!));
+        } else if(searchParams.get("category") !== null) {
+            //Get Artist By Category
+            console.log(searchParams.get("category"));
+            dispatch(getAllArtists());
         }
         return () => { };
     }, [dispatch, searchParams]);
