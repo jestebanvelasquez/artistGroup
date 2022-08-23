@@ -13,6 +13,7 @@ import Dashboard from "../components/Dashboard";
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes"
 import PermissionDenied from "../components/PermissionDenied"
+import FormPago from "../components/pruebaPago/FormPago";
 
 const MainRoutes = () => (
     <Routes>
@@ -26,6 +27,7 @@ const MainRoutes = () => (
             <Route path='/contract' element={<Pagos />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/contract/artist/:id' element={<FormPago />} />
         </Route>
 
         {/** Protected Routes */}

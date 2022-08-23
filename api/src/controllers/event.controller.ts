@@ -16,22 +16,46 @@ const eventController = {
         }
         return res.status(500).json({ message: 'No se encontraron resultados' });
     },
-    // create: async (req: Request, res: Response, _next: NextFunction): Promise<any> => {
-    //     const { name, lastname, city, country } = req.body;
-    //     try {
-    //         const person = await prisma.persona.create({
-    //             data: { name, lastname, city, country }
-    //         });
+    create: async (req: Request, res: Response, _next: NextFunction): Promise<any> => {
+        const {id} = req.params
+        const {name, description, lugar, imagesEvent,duration,price,tiempo  } = req.body
+        try {
+            
+            const event = await prisma.eventos.create({
+                data: {
+                    name,
+                    description,
+                    duration,
+                    imagesEvent,
+                    lugar,
+                    price,
+                    tiempo,
+                    artista:{
+                        connect:{
+                            idUsuario: id
+                        }
+                    }
+                    
+                }
 
-    //         if (!person) {
-    //             throw 'Ocurrió un problema al crear la persona.';
-    //         }
+            });
 
-    //         return res.status(201).json(person);
-    //     } catch (error) {
-    //         return res.status(500).json({ message: error });
-    //     }
-    // }
+            res.status(200).json({data:event})
+        } catch (error) {
+            res.status(400).json({message:error, saludo:'hola'})
+        }
+
+            
+    }
 }
+
+// name        String   @db.VarChar(255)
+// description String   @db.VarChar(500)
+// lugar       String   @db.VarChar(255)
+// imagesEvent String[]
+// duration    Float    @db.Real
+// isActive    Boolean  @default(false)
+// price       Float    @db.Real
+// tiempo
 
 export default eventController;

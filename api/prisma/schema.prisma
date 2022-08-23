@@ -51,7 +51,7 @@ model Eventos {
   lugar       String   @db.VarChar(255)
   imagesEvent String[]
   duration    Float    @db.Real
-  isActive    Boolean  @default(false)
+  isActive    Boolean  @default(true)
   price       Float    @db.Real
   tiempo      Tiempo   @default(horas)
 
