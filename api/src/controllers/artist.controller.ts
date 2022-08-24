@@ -5,20 +5,18 @@ const prisma = new PrismaClient({ log: ['query', 'info'] });
 
 const artistController = {
     getArtist: async (req: Request, res: Response, _next: NextFunction): Promise<any> => {
-        const { name } = req.query;
+        const { name, category } = req.query;
         try {
             if (name) {
                 const artistByName = await prisma.artista.findMany({
+                    select: {
+                        id: true,
+                        name: true,
+                        img: true
+                    },
                     where: {
                         name: {
                             search: `${name}`
-                        }
-                    },
-                    include: {
-                        usuario: {
-                            include: {
-                                persona: true
-                            }
                         }
                     }
                 });
@@ -26,6 +24,30 @@ const artistController = {
                     return res.status(200).json(artistByName);
                 } else {
                     throw `No se encontraron artistas con el nombre de »${name}«.`;
+                }
+            } else if (category) {
+                const artistByIdCategory = await prisma.eventosCategorias.findMany({
+                    select: {
+                        eventos: {
+                            select: {
+                                artista: {
+                                    select: {
+                                        id: true,
+                                        name: true,
+                                        img: true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    where: {
+                        idCategoria: `${category}`
+                    }
+                });
+                if (artistByIdCategory.length > 0) {
+                    res.send(artistByIdCategory);
+                } else {
+                    throw 'No se encontraron artistas con la categoría seleccionada';
                 }
             } else {
                 const artists = await prisma.artista.findMany({

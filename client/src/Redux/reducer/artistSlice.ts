@@ -74,7 +74,12 @@ export const artistSlice = createSlice({
             state.detail = [];
             state.events = [];
         },
-        getByName: (state, action) => {
+        getByName: (state, action: PayloadAction<AllArtistProps[]>) => {
+            state.data = action.payload;
+            state.detail = [];
+            state.events = [];
+        },
+        getByIdCategory: (state, action: PayloadAction<AllArtistProps[]>) => {
             state.data = action.payload;
             state.detail = [];
             state.events = [];
@@ -91,7 +96,7 @@ export const artistSlice = createSlice({
     }
 });
 
-export const { getAll, getByName, getDetail, loadEventsArtist, isLoading } = artistSlice.actions;
+export const { getAll, getByName, getByIdCategory, getDetail, loadEventsArtist, isLoading } = artistSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

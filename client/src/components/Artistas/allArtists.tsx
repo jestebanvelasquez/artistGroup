@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks"
 import { RootState } from "../../redux/store/store";
-import { getAllArtists, getArtistByName } from "../../redux/actions/Artists";
+import { getAllArtists, getArtistByIdCategory, getArtistByName } from "../../redux/actions/Artists";
 
 import { CardArtists } from "./cardArtists";
 import Navbar from "../Navbar";
@@ -19,8 +19,7 @@ export default function AllArtists() {
             dispatch(getArtistByName(searchParams.get("name")!));
         } else if(searchParams.get("category") !== null) {
             //Get Artist By Category
-            console.log(searchParams.get("category"));
-            dispatch(getAllArtists());
+            dispatch(getArtistByIdCategory(searchParams.get("category")!));
         }
         return () => { };
     }, [dispatch, searchParams]);

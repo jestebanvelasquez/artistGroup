@@ -18,7 +18,7 @@ const initialState: ArtistState = {
 };
 
 export const artistSlice = createSlice({
-    name: 'artist',
+    name: 'category',
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {

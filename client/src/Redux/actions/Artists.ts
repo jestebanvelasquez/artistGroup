@@ -1,7 +1,8 @@
 import { AppThunk } from "../store/store";
-import { getAll, getByName, getDetail, isLoading, loadEventsArtist } from "../reducer/artistSlice";
+import { getAll, getByIdCategory, getByName, getDetail, isLoading } from "../reducer/artistSlice";
 import axios from 'axios';
 import { RUTA_APP } from "../..";
+import Swal from "sweetalert2";
 
 export interface ArtistCreateProps {
     name: string;
@@ -22,12 +23,43 @@ export const getAllArtists = (): AppThunk => async (dispatch) => {
     dispatch(isLoading(false));
 }
 
+export const getArtistByIdCategory = (id: string): AppThunk => async (dispatch) => {
+    try {
+        dispatch(isLoading(true));
+        const { data } = await axios.get(`${RUTA_APP}artist?category=${id}`);
+        const artists = data.reduce((previusValue: any, currentValue: any) => {
+            previusValue.length > 0 ? previusValue.map((prev: any) => {
+                if (prev.id !== currentValue.eventos.artista.id) {
+                    previusValue.push(currentValue.eventos.artista);
+                }
+            }) : previusValue.push(currentValue.eventos.artista);
+            return previusValue;
+        }, []);
+        dispatch(getByIdCategory(artists));
+        dispatch(isLoading(false));
+    } catch (error: any) {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: true,
+            timer: 5000
+        });
+    }
+}
+
 export const getArtistByName = (name: string): AppThunk => async (dispatch) => {
     try {
         const { data } = await axios.get(`${RUTA_APP}artist?name=${name}`);
         dispatch(getByName(data));
     } catch (error: any) {
-        alert(error.response.data.message);
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: true,
+            timer: 5000
+        });
     }
 }
 

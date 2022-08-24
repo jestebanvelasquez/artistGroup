@@ -2,12 +2,23 @@ import axios from 'axios';
 import { getAll, isLoading } from '../reducer/categorySlice';
 import { AppThunk } from '../store/store';
 import { RUTA_APP } from '../..';
+import Swal from 'sweetalert2';
 
 export const getAllCategories = (): AppThunk => async (dispatch) => {
-    dispatch(isLoading(true));
-    const { data } = await axios.get(`${RUTA_APP}categories`);
-    dispatch(getAll(data));
-    dispatch(isLoading(false));
+    try {
+        dispatch(isLoading(true));
+        const { data } = await axios.get(`${RUTA_APP}categories`);
+        dispatch(getAll(data));
+        dispatch(isLoading(false));
+    } catch (error: any) {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: true,
+            timer: 5000
+        });
+    }
 }
 
 export const asignarCategoriaEvento = async (arr: object) => {

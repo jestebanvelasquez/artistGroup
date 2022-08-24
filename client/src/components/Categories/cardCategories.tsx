@@ -9,7 +9,7 @@ export default function cardCategories({ categories }: cardCategoriesProps) {
     return (
         <>
             <div className="flex flex-col flex-wrap">
-                <div className="flex flex-row">
+                <div className="flex flex-row justify-center">
                     {categories && categories.length > 0 ? categories.map((c, i) =>
                         <div key={i} className="flex flex-col items-center w-full m-9 p-5 text-center bg-white rounded-md shadow-md duration-300 hover:scale-105 hover:shadow-xl">
                             <p className="text-3xl text-gray-900 m-2 font-bold">{c.name}</p>
