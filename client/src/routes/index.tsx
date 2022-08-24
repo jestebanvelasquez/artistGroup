@@ -4,7 +4,7 @@ import Home from "../components/Home";
 import AllArtists from "../components/Artistas/allArtists";
 import ArtistDetail from "../components/ArtistDetail/ArtistDetail";
 import Categories from "../components/Categories";
-import Pagos from "../components/pruebaPago/Pagos";
+import Pagos from "../pruebaPago/Pagos";
 import Login from "../components/Login";
 import Register from "../components/Register/";
 
@@ -13,6 +13,7 @@ import Dashboard from "../components/Dashboard";
 import ProtectedRoutes from "./ProtectedRoutes";
 import PublicRoutes from "./PublicRoutes"
 import PermissionDenied from "../components/PermissionDenied"
+import FormPago from "../pruebaPago/FormPago";
 
 const MainRoutes = () => (
     <Routes>
@@ -24,6 +25,7 @@ const MainRoutes = () => (
             <Route path='/artists/detail/:id' element={<ArtistDetail />} />
             <Route path='/categories' element={<Categories />} />
             <Route path='/contract' element={<Pagos />} />
+            <Route path='/contract/artist/:id' element={<FormPago />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
         </Route>
