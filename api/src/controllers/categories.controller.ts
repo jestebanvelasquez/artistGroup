@@ -42,6 +42,7 @@ const categoriesController = {
     },
     assignEvent: async (req: Request, res: Response, _next: NextFunction): Promise<any> => {
         const { idEvento, idCategoria } = req.body;
+        console.log(idEvento, idCategoria);
         try {
             const validateAssign = await prisma.eventosCategorias.findMany({
                 where: {

@@ -15,17 +15,6 @@ export interface ArtistDetailProps {
     usuario: Usuario;
 }
 
-export interface Usuario {
-    persona: Persona;
-}
-
-export interface Persona {
-    city: string;
-    country: string;
-    lastname: string;
-    name: string;
-}
-
 export interface EventsArtist {
     artistaId: string;
     description: string;
@@ -38,6 +27,42 @@ export interface EventsArtist {
     price: number;
     tiempo: string;
     eventosCategorias: EventosCategoria[];
+}
+
+export interface ContractEvent {
+    artista: Artista;
+    description: string;
+    duration: number;
+    id: string;
+    imagesEvent: string[];
+    isActive: boolean;
+    lugar: string;
+    name: string;
+    price: number;
+    tiempo: string;
+}
+
+export interface Artista {
+    descripcion: string;
+    id: string;
+    img: string;
+    name: string;
+    usuario: Usuario;
+}
+
+export interface Usuario {
+    email: string;
+    id: string;
+    isAvaliable: boolean;
+    persona: Persona;
+}
+
+export interface Persona {
+    city: string;
+    country: string;
+    id: string;
+    lastname: string;
+    name: string;
 }
 
 export interface EventosCategoria {
@@ -87,6 +112,9 @@ export const artistSlice = createSlice({
         getDetail: (state, action: PayloadAction<ArtistDetailProps[]>) => {
             state.detail = action.payload;
         },
+        loadAllEvents: (state, action) => {
+            state.events = action.payload;
+        },
         loadEventsArtist: (state, action: PayloadAction<EventsArtist[]>) => {
             state.events = action.payload;
         },
@@ -96,7 +124,7 @@ export const artistSlice = createSlice({
     }
 });
 
-export const { getAll, getByName, getByIdCategory, getDetail, loadEventsArtist, isLoading } = artistSlice.actions;
+export const { getAll, getByName, getByIdCategory, getDetail, loadAllEvents, loadEventsArtist, isLoading } = artistSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

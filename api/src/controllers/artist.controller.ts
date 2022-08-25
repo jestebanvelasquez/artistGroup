@@ -5,7 +5,7 @@ const prisma = new PrismaClient({ log: ['query', 'info'] });
 
 const artistController = {
     getArtist: async (req: Request, res: Response, _next: NextFunction): Promise<any> => {
-        const { name, category } = req.query;
+        const { name, category, token } = req.query;
         try {
             if (name) {
                 const artistByName = await prisma.artista.findMany({
@@ -48,6 +48,22 @@ const artistController = {
                     res.send(artistByIdCategory);
                 } else {
                     throw 'No se encontraron artistas con la categoría seleccionada';
+                }
+            } else if (token) {
+                const getIdByToken = await prisma.artista.findMany({
+                    select: {
+                        id: true
+                    },
+                    where: {
+                        usuario: {
+                            token: `${token}`
+                        }
+                    }
+                });
+                if (getIdByToken.length > 0) {
+                    return res.status(200).json(getIdByToken);
+                } else {
+                    throw `No se encontraron usuarios vinculados al token.`;
                 }
             } else {
                 const artists = await prisma.artista.findMany({

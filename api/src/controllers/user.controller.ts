@@ -139,41 +139,69 @@ const userController = {
             })
         }
     },
-    getAll: async (_req: Request, res: Response, _next: NextFunction): Promise<any> => {
+    getAll: async (req: Request, res: Response, _next: NextFunction): Promise<any> => {
+        const { token } = req.query;
         try {
-            const users = await prisma.usuario.findMany({
-                select: {
-                    id: true,
-                    email: true,
-                    token: true,
-                    isAvaliable: true,
-                    persona: {
-                        select: {
-                            id: true,
-                            name: true,
-                            lastname: true,
-                            city: true,
-                            country: true,
+            if (token) {
+                const userByToken = await prisma.usuario.findMany({
+                    select: {
+                        id: true,
+                        email: true,
+                        token: true,
+                        isAvaliable: true,
+                        persona: {
+                            select: {
+                                id: true,
+                                name: true,
+                                lastname: true,
+                                city: true,
+                                country: true,
+                            }
                         }
                     },
-                    rolesUsuarios: {
-                        select: {
-                            idRol: false,
-                            idUsuario: false,
-                            roles: {
-                                select: {
-                                    id: true,
-                                    nombre: true
+                    where: {
+                        token: `${token}`
+                    }
+                });
+                if (!userByToken) {
+                    throw 'No se encontraron usuarios';
+                }
+                return res.status(200).json(userByToken);
+            } else {
+                const users = await prisma.usuario.findMany({
+                    select: {
+                        id: true,
+                        email: true,
+                        token: true,
+                        isAvaliable: true,
+                        persona: {
+                            select: {
+                                id: true,
+                                name: true,
+                                lastname: true,
+                                city: true,
+                                country: true,
+                            }
+                        },
+                        rolesUsuarios: {
+                            select: {
+                                idRol: false,
+                                idUsuario: false,
+                                roles: {
+                                    select: {
+                                        id: true,
+                                        nombre: true
+                                    }
                                 }
                             }
                         }
                     }
+                });
+                if (!users) {
+                    throw 'No se encontraron resultados';
                 }
-            });
-            if (!users) {
-                throw 'No se encontraron resultados';
+                return res.status(200).json(users);
             }
-            return res.status(200).json(users);
         } catch (error) {
             res.status(500).json({
                 message: error
@@ -205,24 +233,24 @@ const userController = {
             });
         }
     },
-    putAvaliable:  async (req: Request, res: Response, _next: NextFunction): Promise<any>=>{
-        const idUser = req.params.id ;
-        const {boolean} = req.body
+    putAvaliable: async (req: Request, res: Response, _next: NextFunction): Promise<any> => {
+        const idUser = req.params.id;
+        const { boolean } = req.body
 
         try {
             await prisma.usuario.update({
                 where: { id: idUser },
                 data: { isAvaliable: boolean }
-            
+
             })
-            
-            const user = await prisma.persona.findUnique({where: {id:idUser}}) 
+
+            const user = await prisma.persona.findUnique({ where: { id: idUser } })
             res.send(user)
-            
+
         } catch (error) {
             res.send(error)
         }
-    } 
+    }
 }
 
 export default userController;

@@ -58,7 +58,7 @@ const WithPermission = ({ roleRequired, message, children }: Props) => {
         <>
             {
                 roleRequired.indexOf(role[0]) > -1 ? children :
-                    <h3>{message ? message : ''}</h3>
+                    message ? message : ''
             }
         </>
     )

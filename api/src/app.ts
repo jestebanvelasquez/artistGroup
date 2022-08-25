@@ -4,6 +4,15 @@ import routes from './routes/index.routes';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import Stripe from 'stripe';
+export const stripe = new Stripe(
+  `${process.env.SECRET_KEY}`,
+  {
+    apiVersion: "2022-08-01",
+    typescript: true,
+  }
+);
+
 export const SERVER_TOKEN_EXPIRETIME = process.env.SERVER_TOKEN_EXPIRETIME || 3600;
 export const SERVER_TOKEN_ISSUER = process.env.SERVER_TOKEN_ISSUER || "coolIssuer";
 export const SERVER_TOKEN_SECRET = process.env.SERVER_TOKEN_SECRET || "superencryptedsecret";

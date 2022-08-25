@@ -4,7 +4,8 @@ import Home from "../components/Home";
 import AllArtists from "../components/Artistas/allArtists";
 import ArtistDetail from "../components/ArtistDetail/ArtistDetail";
 import Categories from "../components/Categories";
-import Pagos from "../components/pruebaPago/Pagos";
+import Contract from "../components/Contract";
+import ContractEvents from "../components/Contract/events";
 import Login from "../components/Login";
 import Register from "../components/Register/";
 
@@ -23,7 +24,8 @@ const MainRoutes = () => (
             <Route path='/artists' element={<AllArtists />} />
             <Route path='/artists/detail/:id' element={<ArtistDetail />} />
             <Route path='/categories' element={<Categories />} />
-            <Route path='/contract' element={<Pagos />} />
+            <Route path='/contract/' element={<Contract />} />
+            <Route path='/contract/event/:id' element={<ContractEvents />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
         </Route>

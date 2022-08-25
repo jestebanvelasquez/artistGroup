@@ -1,17 +1,24 @@
-import { Link, useNavigate } from "react-router-dom";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from 'axios';
 import Swal from "sweetalert2";
 import Navbar from "../Navbar";
 import { RUTA_APP } from "../..";
 
 export default function Login() {
+    const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
     const [input, setInput] = useState({
         email: "",
         password: ""
     });
+
+    useEffect(() => {
+        if (localStorage.getItem('auth-token')) {
+            navigate('/dashboard');
+        }
+    }, []);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInput({
@@ -45,9 +52,13 @@ export default function Login() {
                 showConfirmButton: false,
                 timer: 1500
             });
-
-            //Move to dashboard
-            navigate('/dashboard/');
+            if (searchParams.get("contract") !== null && searchParams.get("eventId") !== null) {
+                //Move to dashboard
+                navigate(`/contract/event/${searchParams.get("eventId")}`);
+            } else {
+                //Move to dashboard
+                navigate('/dashboard/');
+            }
         } catch (error: any) {
             Swal.fire({
                 position: 'center',

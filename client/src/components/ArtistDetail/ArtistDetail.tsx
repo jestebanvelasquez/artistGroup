@@ -41,7 +41,7 @@ export default function ArtistDetail() {
                                 </div>
                                 <div className="mb-5">
                                     <p className="text-xl font-extrabold">Descripción del artista</p>
-                                    <p>{detail[0].descripcion !== null ? detail[0].descripcion : 'No hay una descripción'}</p>
+                                    <p>{detail[0].descripcion !== 'null' ? detail[0].descripcion : 'No hay una descripción'}</p>
                                 </div>
                                 <div className="mb-5 flex flex-row items-center justify-between">
                                     <div>

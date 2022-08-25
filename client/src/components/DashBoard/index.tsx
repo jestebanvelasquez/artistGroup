@@ -13,10 +13,14 @@ export default function Dashboard() {
 
     const [view, setView] = useState<ViewProps>({
         home: true,
+        /* Modulos del Artista */
+        eventosArtista: false,
+        createEvent: false,
+        assignCategoryEvent: false,
+        /* Modulos del administrador */
         asignarRol: false,
-        tableUser: false,
-        tableUserDisabled: false,
-        tableEvent: false
+        allEvents: false,
+        allUsers: false
     });
 
     const changeView = (prop: string) => {
@@ -37,11 +41,11 @@ export default function Dashboard() {
                 <NavbarDashboard changeView={(value: string) => changeView(value)} />
 
                 <WithPermission roleRequired={["ADMINISTRADOR"]}>
-                    <ViewAdmin view={view} />
+                    <ViewAdmin view={view} changeView={(value: string) => changeView(value)} />
                 </WithPermission>
 
                 <WithPermission roleRequired={["ARTISTA"]}>
-                    <ViewArtist view={view} />
+                    <ViewArtist view={view} changeView={(value: string) => changeView(value)} />
                 </WithPermission>
 
                 <WithPermission roleRequired={["USUARIO"]}>

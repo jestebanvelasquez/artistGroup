@@ -1,6 +1,9 @@
 -- CreateEnum
 CREATE TYPE "Tiempo" AS ENUM ('dias', 'horas', 'minutos');
 
+-- CreateEnum
+CREATE TYPE "Horarios" AS ENUM ('am', 'pm');
+
 -- CreateTable
 CREATE TABLE "Persona" (
     "id" TEXT NOT NULL,
@@ -8,7 +11,6 @@ CREATE TABLE "Persona" (
     "lastname" VARCHAR(255) NOT NULL,
     "city" VARCHAR(255) NOT NULL,
     "country" VARCHAR(255) NOT NULL,
-    "isAvaliable" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "Persona_pkey" PRIMARY KEY ("id")
 );
@@ -19,6 +21,7 @@ CREATE TABLE "Usuario" (
     "email" VARCHAR(255) NOT NULL,
     "password" VARCHAR(255) NOT NULL,
     "token" TEXT,
+    "isAvaliable" BOOLEAN NOT NULL DEFAULT true,
     "idPersona" TEXT NOT NULL,
 
     CONSTRAINT "Usuario_pkey" PRIMARY KEY ("id")
@@ -42,7 +45,7 @@ CREATE TABLE "Eventos" (
     "description" VARCHAR(500) NOT NULL,
     "lugar" VARCHAR(255) NOT NULL,
     "imagesEvent" TEXT[],
-    "duration" REAL NOT NULL,
+    "duration" TEXT NOT NULL,
     "isActive" BOOLEAN NOT NULL DEFAULT false,
     "price" REAL NOT NULL,
     "tiempo" "Tiempo" NOT NULL DEFAULT 'horas',
@@ -53,10 +56,13 @@ CREATE TABLE "Eventos" (
 
 -- CreateTable
 CREATE TABLE "UsuarioEventos" (
+    "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "idEvento" TEXT NOT NULL,
+    "direccion" VARCHAR(255) NOT NULL,
+    "fechaEvento" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "UsuarioEventos_pkey" PRIMARY KEY ("userId","idEvento")
+    CONSTRAINT "UsuarioEventos_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -78,19 +84,17 @@ CREATE TABLE "Categorias" (
 -- CreateTable
 CREATE TABLE "Compras" (
     "id" TEXT NOT NULL,
-    "code" VARCHAR(255) NOT NULL,
+    "code" JSONB NOT NULL,
 
     CONSTRAINT "Compras_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "EventosCompras" (
-    "id" TEXT NOT NULL,
     "idEvento" TEXT NOT NULL,
     "idCompra" TEXT NOT NULL,
-    "idUsuario" TEXT NOT NULL,
 
-    CONSTRAINT "EventosCompras_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "EventosCompras_pkey" PRIMARY KEY ("idEvento","idCompra")
 );
 
 -- CreateTable
@@ -147,9 +151,6 @@ ALTER TABLE "EventosCompras" ADD CONSTRAINT "EventosCompras_idEvento_fkey" FOREI
 
 -- AddForeignKey
 ALTER TABLE "EventosCompras" ADD CONSTRAINT "EventosCompras_idCompra_fkey" FOREIGN KEY ("idCompra") REFERENCES "Compras"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "EventosCompras" ADD CONSTRAINT "EventosCompras_idUsuario_fkey" FOREIGN KEY ("idUsuario") REFERENCES "Usuario"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "RolesUsuarios" ADD CONSTRAINT "RolesUsuarios_idRol_fkey" FOREIGN KEY ("idRol") REFERENCES "Roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

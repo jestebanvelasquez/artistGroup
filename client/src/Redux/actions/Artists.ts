@@ -17,10 +17,20 @@ export const createArtist = async (arr: ArtistCreateProps) => {
 }
 
 export const getAllArtists = (): AppThunk => async (dispatch) => {
-    dispatch(isLoading(true));
-    const { data } = await axios.get(`${RUTA_APP}artist`);
-    dispatch(getAll(data));
-    dispatch(isLoading(false));
+    try {
+        dispatch(isLoading(true));
+        const { data } = await axios.get(`${RUTA_APP}artist`);
+        dispatch(getAll(data));
+        dispatch(isLoading(false));
+    } catch (error: any) {
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: error.response.data.message,
+            showConfirmButton: true,
+            timer: 5000
+        });
+    }
 }
 
 export const getArtistByIdCategory = (id: string): AppThunk => async (dispatch) => {
@@ -28,11 +38,7 @@ export const getArtistByIdCategory = (id: string): AppThunk => async (dispatch) 
         dispatch(isLoading(true));
         const { data } = await axios.get(`${RUTA_APP}artist?category=${id}`);
         const artists = data.reduce((previusValue: any, currentValue: any) => {
-            previusValue.length > 0 ? previusValue.map((prev: any) => {
-                if (prev.id !== currentValue.eventos.artista.id) {
-                    previusValue.push(currentValue.eventos.artista);
-                }
-            }) : previusValue.push(currentValue.eventos.artista);
+            previusValue.length > 0 ? previusValue.map((prev: any) => (prev.id !== currentValue.eventos.artista.id) ? previusValue.push(currentValue.eventos.artista) : '') : previusValue.push(currentValue.eventos.artista);
             return previusValue;
         }, []);
         dispatch(getByIdCategory(artists));
@@ -61,6 +67,11 @@ export const getArtistByName = (name: string): AppThunk => async (dispatch) => {
             timer: 5000
         });
     }
+}
+
+export const getIdArtistByToken = async () => {
+    const { data } = await axios.get(`${RUTA_APP}artist?token=${localStorage.getItem('auth-token')}`);
+    return data;
 }
 
 export const getArtistDetail = (id: string): AppThunk => async (dispatch) => {

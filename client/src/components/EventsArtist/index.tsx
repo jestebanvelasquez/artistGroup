@@ -58,7 +58,7 @@ export default function EventsArtistView({ idArtist }: EventsArtistProps) {
                                             </div>
                                             <div className="mb-5">
                                                 <p className="text-xl font-extrabold">Precio del evento</p>
-                                                <p>${event.price} COP.</p>
+                                                <p>${event.price} USD.</p>
                                             </div>
                                             <div className="mb-5">
                                                 <p className="text-xl font-extrabold">Tiempo del evento</p>
@@ -66,7 +66,7 @@ export default function EventsArtistView({ idArtist }: EventsArtistProps) {
                                             </div>
                                             <div className="flex flex-row justify-center">
                                                 {
-                                                    event.isActive ? <Link to={`/contract/event/:id`} className="px-10 py-2 mt-3 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 active:scale-95 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:cursor-not-allowed transition-colors duration-200">Solicitar evento</Link> : <button className="px-10 py-2 mt-3 text-sm font-medium text-white bg-red-500 rounded-lg border border-red-700 active:scale-95 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:cursor-not-allowed transition-colors duration-200" disabled>Este evento no está disponible</button>
+                                                    event.isActive ? <Link to={`/contract/event/${event.id}`} className="px-10 py-2 mt-3 text-sm font-medium text-white bg-blue-500 rounded-lg border border-blue-700 active:scale-95 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:cursor-not-allowed transition-colors duration-200">Solicitar evento</Link> : <button className="px-10 py-2 mt-3 text-sm font-medium text-white bg-red-500 rounded-lg border border-red-700 active:scale-95 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:cursor-not-allowed transition-colors duration-200" disabled>Este evento no está disponible</button>
                                                 }
                                             </div>
                                         </div>

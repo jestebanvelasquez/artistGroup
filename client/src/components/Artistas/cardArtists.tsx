@@ -23,7 +23,10 @@ export const CardArtists: React.FC<ArtistProps> = ({ artists }) => {
                         </div>
                     </div>
                 )
-            }) : ''}
+            }) : <div className="w-full flex flex-col items-center my-10">
+                <p className="text-4xl font-light my-5">No hay artistas creados, sé el primero en registrarte 🙌.</p>
+                <Link to="/register" className="py-3 px-6 text-lg bg-blue-500 text-white rounded my-3">!Registrarme Ahora¡</Link>
+            </div>}
 
         </div>
     )
